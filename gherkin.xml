@@ -26,18 +26,25 @@
     <contexts>
       <context name="base" attribute="Text" lineEndContext="#stay">
         <IncludeRules context="general" />
-        <WordDetect String="Feature:" attribute="Keyword" context="featureHeading" firstNonSpace="true" beginRegion="feature" />
+        
+        <WordDetect String="Feature:" attribute="Keyword" context="featureHeading" firstNonSpace="true" />
       </context>
       
       <context name="featureHeading" attribute="Text" lineEndContext="feature" />
       <context name="feature" attribute="Text" lineEndContext="#stay" >
         <IncludeRules context="general" />
-        <WordDetect String="Background:" attribute="Keyword" context="backgroundHeading" firstNonSpace="true" beginRegion="background" />
+        
+        <WordDetect String="Background:" attribute="Keyword" context="scenarioHeading" firstNonSpace="true" />
       </context>
       
-      <context name="backgroundHeading" attribute="Text" lineEndContext="background" />
-      <context name="background" attribute="Text" lineEndContext="#stay"  fallthrough="true" fallthroughContext="error">
+      <context name="scenarioDetect" attribute="Text" lineEndContext="#stay">
+        <WordDetect String="Scenario:" attribute="Keyword" context="scenarioHeading" firstNonSpace="true" />
+      </context>
+      
+      <context name="scenarioHeading" attribute="Text" lineEndContext="scenario" />
+      <context name="scenario" attribute="Text" lineEndContext="#stay"  fallthrough="true" fallthroughContext="error">
         <IncludeRules context="general" />
+        <IncludeRules context="scenarioDetect" />
       </context>
       
       <context name="tags" attribute="Tag" lineEndContext="#pop" fallthrough="true" fallthroughContext="error">
@@ -69,5 +76,6 @@
     <comments>
       <comment name="singleLine" start="#" />
     </comments>
+    <folding indentationsensitive="true" />
   </general>
 </language>
