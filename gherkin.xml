@@ -28,6 +28,7 @@
         <DetectSpaces />
         
         <DetectChar char="@" attribute="tag" context="tags" firstNonSpace="true" lookAhead="true" />
+        <DetectChar char="#" attribute="comment" context="comment" firstNonSpace="true" />
       </context>
       
       <context name="tags" attribute="tag" lineEndContext="base" fallthrough="true" fallthroughContext="error">
@@ -35,13 +36,15 @@
         <RegExpr String="@[^@\r\n\t ]+" />
       </context>
       
-      <context name="error" attribute="error" lineEndContext="#pop" />
+      <context name="comment" attribute="comment" lineEndContext="base" />
+      <context name="error" attribute="error" lineEndContext="base" />
     </contexts>
     
     <itemDatas>
       <itemData name="base" defStyleNum="dsNormal" />
       <itemData name="tag" defStyleNum="dsOthers" />
       <itemData name="error" defStyleNum="dsError" />
+      <itemData name="comment" defStyleNum="dsComment"/>
     </itemDatas>
   </highlighting>
   
