@@ -42,10 +42,14 @@
       </context>
       
       <context name="scenarioHeading" attribute="Text" lineEndContext="scenario" />
-      <context name="scenario" attribute="Text" lineEndContext="#stay"  fallthrough="true" fallthroughContext="error">
+      <context name="scenario" attribute="Text" lineEndContext="#stay" fallthrough="true" fallthroughContext="error">
         <IncludeRules context="general" />
         <IncludeRules context="scenarioDetect" />
+        
+        <keyword String="steps" attribute="Keyword" context="step" firstNonSpace="true"/>
       </context>
+      
+      <context name="step" attribute="Text" lineEndContext="#pop"/>
       
       <context name="tags" attribute="Tag" lineEndContext="#pop" fallthrough="true" fallthroughContext="error">
         <DetectSpaces />
