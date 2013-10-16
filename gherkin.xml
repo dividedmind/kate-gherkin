@@ -24,7 +24,7 @@
     </list>
 
     <contexts>
-      <context name="base" attribute="Text" lineEndContext="#stay">
+      <context name="base" attribute="Text" lineEndContext="#stay" fallthrough="true" fallthroughContext="error">
         <IncludeRules context="general" />
         
         <WordDetect String="Feature:" attribute="Keyword" context="featureHeading" firstNonSpace="true" />
@@ -35,6 +35,7 @@
         <IncludeRules context="general" />
         
         <WordDetect String="Background:" attribute="Keyword" context="scenarioHeading" firstNonSpace="true" />
+        <IncludeRules context="scenarioDetect" />
       </context>
       
       <context name="scenarioDetect" attribute="Text" lineEndContext="#stay">
