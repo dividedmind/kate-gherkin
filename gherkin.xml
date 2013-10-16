@@ -6,13 +6,13 @@
           author="Rafał Rzepecki (divided.mind@gmail.com)" license="LGPL">
   <highlighting>
     <list name="headings">
-      <item>Feature</item>
-      <item>Background</item>
-      <item>Scenario</item>
-      <item>Scenarios</item>
-      <item>Scenario Template</item>
-      <item>Scenario Outline</item>
-      <item>Examples</item>
+      <item>Feature:</item>
+      <item>Background:</item>
+      <item>Scenario:</item>
+      <item>Scenarios:</item>
+      <item>Scenario Template:</item>
+      <item>Scenario Outline:</item>
+      <item>Examples:</item>
     </list>
     
     <list name="steps">
@@ -24,32 +24,48 @@
     </list>
 
     <contexts>
-      <context name="base" attribute="base" lineEndContext="#stay">
-        <DetectSpaces />
-        
-        <DetectChar char="@" attribute="tag" context="tags" firstNonSpace="true" lookAhead="true" />
-        <DetectChar char="#" attribute="comment" context="comment" firstNonSpace="true" />
+      <context name="base" attribute="Text" lineEndContext="#stay">
+        <IncludeRules context="general" />
+        <WordDetect String="Feature:" attribute="Keyword" context="featureHeading" firstNonSpace="true" beginRegion="feature" />
       </context>
       
-      <context name="tags" attribute="tag" lineEndContext="base" fallthrough="true" fallthroughContext="error">
+      <context name="featureHeading" attribute="Text" lineEndContext="feature" />
+      <context name="feature" attribute="Text" lineEndContext="#stay" >
+        <IncludeRules context="general" />
+        <WordDetect String="Background:" attribute="Keyword" context="backgroundHeading" firstNonSpace="true" beginRegion="background" />
+      </context>
+      
+      <context name="backgroundHeading" attribute="Text" lineEndContext="background" />
+      <context name="background" attribute="Text" lineEndContext="#stay"  fallthrough="true" fallthroughContext="error">
+        <IncludeRules context="general" />
+      </context>
+      
+      <context name="tags" attribute="Tag" lineEndContext="#pop" fallthrough="true" fallthroughContext="error">
         <DetectSpaces />
         <RegExpr String="@[^@\r\n\t ]+" />
       </context>
       
-      <context name="comment" attribute="comment" lineEndContext="base" />
-      <context name="error" attribute="error" lineEndContext="base" />
+      <context name="general" attribute="Text" lineEndContext="#stay" fallthrough="true" fallthroughContext="error">
+        <DetectSpaces />
+        <DetectChar char="@" attribute="Tag" context="tags" firstNonSpace="true" lookAhead="true" />
+        <DetectChar char="#" attribute="Comment" context="comment" firstNonSpace="true" />
+      </context>
+
+      <context name="comment" attribute="Comment" lineEndContext="#pop" />
+      <context name="error" attribute="Error" lineEndContext="#pop" />
     </contexts>
     
     <itemDatas>
-      <itemData name="base" defStyleNum="dsNormal" />
-      <itemData name="tag" defStyleNum="dsOthers" />
-      <itemData name="error" defStyleNum="dsError" />
-      <itemData name="comment" defStyleNum="dsComment"/>
+      <itemData name="Text" defStyleNum="dsNormal" />
+      <itemData name="Tag" defStyleNum="dsOthers" />
+      <itemData name="Error" defStyleNum="dsError" />
+      <itemData name="Comment" defStyleNum="dsComment"/>
+      <itemData name="Keyword" defStyleNum="dsKeyword"/>
     </itemDatas>
   </highlighting>
   
   <general>
-    <keywords casesensitive="1" />
+    <keywords casesensitive="1"  weakDeliminator=":" />
     <comments>
       <comment name="singleLine" start="#" />
     </comments>
