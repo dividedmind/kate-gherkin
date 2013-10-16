@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+
+<language name="Gherkin" section="Other" extensions="*.feature" mimetype="text/x-gherkin"
+          version="0.0.1" kateversion="2.4" casesensitive="1"
+          author="Rafał Rzepecki (divided.mind@gmail.com)" license="LGPL">
+  <highlighting>
+    <list name="headings">
+      <item>Feature</item>
+      <item>Background</item>
+      <item>Scenario</item>
+      <item>Scenarios</item>
+      <item>Scenario Template</item>
+      <item>Scenario Outline</item>
+      <item>Examples</item>
+    </list>
+    
+    <list name="steps">
+      <item>But</item>
+      <item>And</item>
+      <item>Then</item>
+      <item>When</item>
+      <item>Given</item>
+    </list>
+
+    <contexts>
+      <context name="base" attribute="base" lineEndContext="#stay">
+        <DetectSpaces />
+        
+        <DetectChar char="@" attribute="tag" context="tags" firstNonSpace="true" lookAhead="true" />
+      </context>
+      
+      <context name="tags" attribute="tag" lineEndContext="base" fallthrough="true" fallthroughContext="error">
+        <DetectSpaces />
+        <RegExpr String="@[^@\r\n\t ]+" />
+      </context>
+      
+      <context name="error" attribute="error" lineEndContext="#pop" />
+    </contexts>
+    
+    <itemDatas>
+      <itemData name="base" defStyleNum="dsNormal" />
+      <itemData name="tag" defStyleNum="dsOthers" />
+      <itemData name="error" defStyleNum="dsError" />
+    </itemDatas>
+  </highlighting>
+  
+  <general>
+    <keywords casesensitive="1" />
+    <comments>
+      <comment name="singleLine" start="#" />
+    </comments>
+  </general>
+</language>
