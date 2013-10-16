@@ -68,11 +68,11 @@
     </contexts>
     
     <itemDatas>
-      <itemData name="Text" defStyleNum="dsNormal" />
-      <itemData name="Tag" defStyleNum="dsOthers" />
-      <itemData name="Error" defStyleNum="dsError" />
-      <itemData name="Comment" defStyleNum="dsComment"/>
-      <itemData name="Keyword" defStyleNum="dsKeyword"/>
+      <itemData name="Text" defStyleNum="dsNormal" spellChecking="true" />
+      <itemData name="Tag" defStyleNum="dsOthers" spellChecking="false" />
+      <itemData name="Error" defStyleNum="dsError" spellChecking="false" />
+      <itemData name="Comment" defStyleNum="dsComment" spellChecking="true" />
+      <itemData name="Keyword" defStyleNum="dsKeyword" spellChecking="false" />
     </itemDatas>
   </highlighting>
   
